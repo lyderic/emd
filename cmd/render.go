@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/charmbracelet/glamour"
+	"github.com/spf13/viper"
 )
 
 func render(path string) (err error) {
@@ -18,8 +19,8 @@ func render(path string) (err error) {
 		return
 	}
 	r, _ := glamour.NewTermRenderer(
-		glamour.WithStandardStyle(c.Style),
-		glamour.WithWordWrap(c.WordWrap),
+		glamour.WithStandardStyle(viper.GetString("theme")),
+		glamour.WithWordWrap(viper.GetInt("width")),
 	)
 	out, err := r.RenderBytes(raw)
 	if err != nil {
