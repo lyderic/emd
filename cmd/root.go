@@ -4,25 +4,24 @@ import (
 	"fmt"
 	"os"
 
+	"golang.org/x/term"
+
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
+const VERSION = "0.0.3"
+
 var rootCmd = &cobra.Command{
-	Use:     "emd",
+	Use:     "emd <option> <file.md>",
 	Short:   "A basic markdown viewer for the command line",
 	Version: VERSION,
+	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if viper.GetBool("list-themes") {
 			listThemes()
 			return nil
-		}
-		if viper.GetBool("pager") {
-			color.Yellow("pager not implemented yet")
-		}
-		if len(args) < 1 {
-			return fmt.Errorf("missing file argument!")
 		}
 		return render(args[0])
 	},
@@ -35,21 +34,23 @@ func Execute() {
 	}
 }
 
-const VERSION = "0.0.2"
-
 var cfgFile string
 
 func init() {
+	w, _, err := term.GetSize(0)
+	if err != nil {
+		color.Yellow("cannot get terminal size")
+	}
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.emd.yaml)")
 	rootCmd.PersistentFlags().StringP("theme", "t", "dark", "theme")
 	rootCmd.PersistentFlags().BoolP("list-themes", "l", false, "list available themes")
-	rootCmd.PersistentFlags().IntP("width", "w", 80, "word wrap width")
-	rootCmd.PersistentFlags().BoolP("pager", "p", false, "use pager")
+	rootCmd.PersistentFlags().IntP("width", "w", w, "word wrap width")
+	rootCmd.PersistentFlags().BoolP("no-pager", "n", false, "don't use pager")
 	viper.BindPFlag("theme", rootCmd.PersistentFlags().Lookup("theme"))
 	viper.BindPFlag("list-themes", rootCmd.PersistentFlags().Lookup("list-themes"))
 	viper.BindPFlag("width", rootCmd.PersistentFlags().Lookup("width"))
-	viper.BindPFlag("pager", rootCmd.PersistentFlags().Lookup("pager"))
+	viper.BindPFlag("no-pager", rootCmd.PersistentFlags().Lookup("no-pager"))
 }
 
 func initConfig() {
