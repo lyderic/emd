@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-const VERSION = "0.0.3"
+const VERSION = "0.0.4"
 
 var rootCmd = &cobra.Command{
 	Use:     "emd <option> <file.md>",

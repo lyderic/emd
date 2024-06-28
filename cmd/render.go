@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	. "github.com/lyderic/tools"
@@ -25,6 +26,10 @@ func render(path string) (err error) {
 	)
 	out, err := r.RenderBytes(raw)
 	if err != nil {
+		return
+	}
+	if viper.GetBool("no-pager") {
+		fmt.Println(string(out))
 		return
 	}
 	return Less(string(out))
