@@ -1,16 +1,18 @@
 package cmd
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
-var themes = [4]string{
+var themes = [5]string{
 	"dark",
 	"light",
 	"dracula",
 	"pink",
+	"notty",
 }
 
-func listThemes() {
-	for _, theme := range themes {
-		fmt.Println("•", theme)
-	}
+func warn(message string) {
+	fmt.Fprintf(os.Stderr, "\033[7mWarning: %s\033[m\n", message)
 }

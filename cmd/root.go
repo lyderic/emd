@@ -11,18 +11,14 @@ import (
 	"github.com/spf13/viper"
 )
 
-const VERSION = "0.0.4"
-
 var rootCmd = &cobra.Command{
-	Use:     "emd <option> <file.md>",
-	Short:   "A basic markdown viewer for the command line",
-	Version: VERSION,
-	Args:    cobra.ExactArgs(1),
+	Use:                   "emd [-n] [-t <theme>] [-w <width>] file.md",
+	DisableFlagsInUseLine: true,
+	SilenceUsage:          true,
+	Short:                 "A basic markdown viewer for the command line",
+	Version:               VERSION,
+	Args:                  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if viper.GetBool("list-themes") {
-			listThemes()
-			return nil
-		}
 		return render(args[0])
 	},
 }
@@ -44,11 +40,10 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.emd.yaml)")
 	rootCmd.PersistentFlags().StringP("theme", "t", "dark", "theme")
-	rootCmd.PersistentFlags().BoolP("list-themes", "l", false, "list available themes")
 	rootCmd.PersistentFlags().IntP("width", "w", w, "word wrap width")
 	rootCmd.PersistentFlags().BoolP("no-pager", "n", false, "don't use pager")
+	rootCmd.PersistentFlags().SortFlags = false
 	viper.BindPFlag("theme", rootCmd.PersistentFlags().Lookup("theme"))
-	viper.BindPFlag("list-themes", rootCmd.PersistentFlags().Lookup("list-themes"))
 	viper.BindPFlag("width", rootCmd.PersistentFlags().Lookup("width"))
 	viper.BindPFlag("no-pager", rootCmd.PersistentFlags().Lookup("no-pager"))
 }
@@ -63,10 +58,8 @@ func initConfig() {
 		viper.SetConfigType("yaml")
 		viper.SetConfigName(".emd")
 	}
-
 	viper.SetEnvPrefix("EMD")
 	viper.AutomaticEnv() // read in environment variables that match
-
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
