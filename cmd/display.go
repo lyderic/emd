@@ -11,7 +11,7 @@ import (
 
 func init() {
 	if _, err := exec.LookPath(PAGER); err != nil {
-		warn(fmt.Sprintf("Command %q not found!", PAGER))
+		debug(fmt.Sprintf("Command %q not found!", PAGER))
 		viper.SetDefault("no-pager", true)
 		return
 	}
