@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
+
+	"github.com/spf13/viper"
 )
 
 var themes = [5]string{
@@ -13,6 +15,8 @@ var themes = [5]string{
 	"notty",
 }
 
-func warn(message string) {
-	fmt.Fprintf(os.Stderr, "\033[7mWarning: %s\033[m\n", message)
+func debug(message string) {
+	if viper.GetBool("debug") {
+		fmt.Fprintf(os.Stderr, "\033[7m%s\033[m\n", message)
+	}
 }
