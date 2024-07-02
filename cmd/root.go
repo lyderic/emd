@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/fatih/color"
@@ -33,11 +34,12 @@ var cfgFile string
 func init() {
 	cobra.OnInitialize(initConfig)
 	w := initTerm()
+	debug(fmt.Sprintf("w=%d", w))
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "",
 		"config file (default is $HOME/.emd.yaml)")
 	rootCmd.PersistentFlags().StringP("theme", "t", "dark",
 		"`name` of the theme")
-	rootCmd.PersistentFlags().IntP("width", "w", w,
+	rootCmd.PersistentFlags().IntP("width", "w", 0,
 		"word wrap `width`")
 	rootCmd.PersistentFlags().BoolP("no-pager", "n", false,
 		"don't use pager")
@@ -76,6 +78,7 @@ func initConfig() {
 		viper.SetConfigName(".emd")
 	}
 	viper.SetEnvPrefix("EMD")
-	viper.AutomaticEnv() // read in environment variables that match
+	viper.AutomaticEnv() // EMD_* envvars
 	viper.ReadInConfig()
+	debug(fmt.Sprintf("%#v\n", viper.AllSettings()))
 }

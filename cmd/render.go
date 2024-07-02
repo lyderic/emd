@@ -30,8 +30,7 @@ func render(path string) (err error) {
 
 /*
  * Given:
- *  tw = terminal width (computed by x/term lib in root.go),
- *  and
+ *  tw = terminal width (computed by x/term lib in root.go), and
  *  cw = width given by configuration (--width flag,
  *    EMD_WIDTH envvar, etc.)
  *
