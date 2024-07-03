@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/viper"
 )
@@ -13,6 +14,17 @@ var themes = [5]string{
 	"dracula",
 	"pink",
 	"notty",
+}
+
+func longHelp() (output string) {
+	var b strings.Builder
+	fmt.Fprintf(&b, "\n\033[7m%s %s: %s\033[m\n",
+		PROGNAME, VERSION, DESCRIPTION)
+	fmt.Fprintln(&b, "\nAvailable themes:")
+	for _, theme := range themes {
+		fmt.Fprintln(&b, " •", theme)
+	}
+	return b.String()
 }
 
 func debug(message string) {

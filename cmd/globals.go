@@ -1,6 +1,8 @@
 package cmd
 
 const (
-	VERSION = "0.0.8"
-	PAGER   = "less" /* more doesn't work */
+	PROGNAME    = "emd"
+	VERSION     = "0.0.9"
+	PAGER       = "less" /* more doesn't work */
+	DESCRIPTION = "markdown viewer for the command line"
 )

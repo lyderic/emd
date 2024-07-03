@@ -14,7 +14,8 @@ var rootCmd = &cobra.Command{
 	DisableFlagsInUseLine: true,
 	//SilenceUsage:          true,
 	Use:     "emd [-n] [-t <theme>] [-w <width>] file.md",
-	Short:   "A basic markdown viewer for the command line",
+	Short:   DESCRIPTION, // globals.go
+	Long:    longHelp(),  // utils.go
 	Version: VERSION,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -36,7 +37,7 @@ func init() {
 	w := initTerm()
 	debug(fmt.Sprintf("w=%d", w))
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "",
-		"config file (default is $HOME/.emd.yaml)")
+		"config `file` (default is $HOME/.emd.yaml)")
 	rootCmd.PersistentFlags().StringP("theme", "t", "dark",
 		"`name` of the theme")
 	rootCmd.PersistentFlags().IntP("width", "w", 0,
