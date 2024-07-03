@@ -18,7 +18,7 @@ var themes = [5]string{
 
 func longHelp() (output string) {
 	var b strings.Builder
-	fmt.Fprintf(&b, "\n\033[7m%s %s: %s\033[m\n",
+	fmt.Fprintf(&b, "\n\033[1m%s %s: %s\033[m\n",
 		PROGNAME, VERSION, DESCRIPTION)
 	fmt.Fprintln(&b, "\nAvailable themes:")
 	for _, theme := range themes {
