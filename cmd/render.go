@@ -40,15 +40,17 @@ func render(path string) (err error) {
  *   - if cw > tw: use tw
  *   - if cw < tw: use cw
  */
-func getOptimalWidth() (w int) {
+func getOptimalWidth() (ow int) {
 	tw := viper.GetInt("termwidth")
 	cw := viper.GetInt("width")
-	debug(fmt.Sprintf("Width:\n Terminal = %d\n Configuration = %d", tw, cw))
 	if cw > tw {
-		return tw
+		ow = tw - 3 // -3 : because we need a little margin
+	} else {
+		//if cw < tw {
+		//return cw
+		//}
+		ow = cw
 	}
-	if cw < tw {
-		return cw
-	}
-	return cw
+	debug(fmt.Sprintf("Width:\n Terminal = %d\n Configuration = %d\n Optimal = %d\n", tw, cw, ow))
+	return
 }
