@@ -16,6 +16,10 @@ func render(path string) (err error) {
 	if content, err = os.ReadFile(path); err != nil {
 		return
 	}
+	return renderBytes(content)
+}
+
+func renderBytes(content []byte) (err error) {
 	width := getOptimalWidth()
 	r, _ := glamour.NewTermRenderer(
 		glamour.WithStandardStyle(viper.GetString("theme")),
