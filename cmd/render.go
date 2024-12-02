@@ -38,23 +38,19 @@ func renderBytes(content []byte) (err error) {
  *  cw = width given by configuration (--width flag,
  *    EMD_WIDTH envvar, etc.)
  *
- * If cw not set: use tw
+ * If cw not set: use tw (minus a little margin)
  *
  * If cw is set:
- *   - if cw > tw: use tw
+ *   - if cw > tw: use tw (minus a little margin)
  *   - if cw < tw: use cw
  */
 func getOptimalWidth() (ow int) {
 	tw := viper.GetInt("termwidth")
-	cw := viper.GetInt("width")
-	if cw > tw {
-		ow = tw - 3 // -3 : because we need a little margin
-	} else {
-		//if cw < tw {
-		//return cw
-		//}
+	cw := viper.GetInt("configwidth")
+	ow = tw - 2              // -2 = little margin, default case
+	if cw > 0 && cw < tw-1 { // -1 for margin
 		ow = cw
 	}
-	debug(fmt.Sprintf("Width:\n Terminal = %d\n Configuration = %d\n Optimal = %d\n", tw, cw, ow))
+	debug(fmt.Sprintf("Width: tw=%d cw=%d ow=%d\n", tw, cw, ow))
 	return
 }

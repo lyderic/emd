@@ -49,7 +49,7 @@ func init() {
 	rootCmd.PersistentFlags().SortFlags = false
 	viper.BindPFlag("theme",
 		rootCmd.PersistentFlags().Lookup("theme"))
-	viper.BindPFlag("width",
+	viper.BindPFlag("configwidth",
 		rootCmd.PersistentFlags().Lookup("width"))
 	viper.BindPFlag("no-pager",
 		rootCmd.PersistentFlags().Lookup("no-pager"))
@@ -62,7 +62,7 @@ func initTerm() (w int) {
 	w, _, err = term.GetSize(0)
 	if err != nil {
 		color.Yellow("cannot get terminal size")
-		w = 80
+		w = 70
 	}
 	viper.SetDefault("termwidth", w)
 	return
