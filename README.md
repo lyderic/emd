@@ -5,7 +5,9 @@ This viewer is very basic and simple. It uses [Charm's _glamour_ library](https:
 
 ## Installation
 
-Download the binary corresponding to your platform.
+Download the binary corresponding to your platform. For the moment, I have only tested this on Linux (Arch). If you want paging, `less` needs to be installed.
+
+You can also build it with `go build`.
 
 ## Usage
 
