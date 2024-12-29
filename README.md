@@ -15,7 +15,7 @@ $ emd file.md
 
 ## Help
 
-```bash
+```text
 $ emd --help
 
 emd 0.1.6: markdown viewer for the command line
