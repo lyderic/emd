@@ -40,7 +40,7 @@ func init() {
 		"config `file` (default is $HOME/.emd.yaml)")
 	rootCmd.PersistentFlags().StringP("theme", "t", "dark",
 		"`name` of the theme")
-	rootCmd.PersistentFlags().IntP("width", "w", 0,
+	rootCmd.PersistentFlags().IntP("wrap", "w", 0,
 		"word wrap `width`")
 	rootCmd.PersistentFlags().BoolP("no-pager", "n", false,
 		"don't use pager")
@@ -50,7 +50,7 @@ func init() {
 	viper.BindPFlag("theme",
 		rootCmd.PersistentFlags().Lookup("theme"))
 	viper.BindPFlag("configwidth",
-		rootCmd.PersistentFlags().Lookup("width"))
+		rootCmd.PersistentFlags().Lookup("wrap"))
 	viper.BindPFlag("no-pager",
 		rootCmd.PersistentFlags().Lookup("no-pager"))
 	viper.BindPFlag("debug",
