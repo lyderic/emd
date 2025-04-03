@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/glamour v0.9.1
 	github.com/fatih/color v1.18.0
 	github.com/spf13/cobra v1.9.1
-	github.com/spf13/viper v1.20.0
+	github.com/spf13/viper v1.20.1
 	golang.org/x/term v0.30.0
 )
 
