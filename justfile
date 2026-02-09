@@ -12,6 +12,15 @@ build:
 	GOARCH=arm64 go build -v -o emd_arm64
 	GOARCH=arm go build -v -o emd_arm
 
+tag:
+	#!/bin/bash
+	git tag 
+	tag=$(grep VERSION cmd/globals.go | awk -F= '{ print $2 }' | tr -d '"' | sed -e 's/ /v/')
+	echo -n "Please confirm you want to add this tag: [${tag}] [y/N]? "
+	read yesno ; [[ "${yesno,,}" =~ ^(y|yes)$ ]] || exit 0
+	git tag "${tag}"
+	git push origin --tags
+
 [private]
 v:
 	just --evaluate
