@@ -8,9 +8,13 @@ _help:
 CGO_ENABLED := '0' # otherwise binaries produced are dynamically linked and don't work on musl distros like alpine0
 
 build:
-	GOARCH=amd64 go build -v -o emd_amd64
-	GOARCH=arm64 go build -v -o emd_arm64
-	GOARCH=arm go build -v -o emd_arm
+	#!/bin/bash
+	version=$(grep VERSION cmd/globals.go | awk -F= '{ print $2 }' | tr -d '"' | sed -e 's/ //')
+	echo $version
+	GOARCH=amd64 go build -v -o emd-${version}-linux-amd64
+	GOARCH=arm64 go build -v -o emd-${version}-linux-arm64
+	GOARCH=arm   go build -v -o emd-${version}-linux-arm
+	xz --compress --keep -9 --extreme --verbose emd-*-linux-*
 
 tag:
 	#!/bin/bash

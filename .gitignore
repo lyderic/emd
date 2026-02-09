@@ -23,6 +23,7 @@ go.work.sum
 
 # Compressed files
 *.gz
+*.xz
 
 # Ignore binary
 emd*
