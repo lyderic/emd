@@ -12,11 +12,6 @@ build:
 	GOARCH=arm64 go build -v -o emd_arm64
 	GOARCH=arm go build -v -o emd_arm
 
-# smaller binary size
-release:
-	go build -ldflags="-s -w"
-	./emd --version
-
 [private]
 v:
 	just --evaluate
