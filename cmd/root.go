@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/term"
@@ -61,7 +60,7 @@ func initTerm() (w int) {
 	var err error
 	w, _, err = term.GetSize(0)
 	if err != nil {
-		color.Yellow("cannot get terminal size")
+		/* color.Yellow("cannot get terminal size") */
 		w = 70
 	}
 	viper.SetDefault("termwidth", w)
