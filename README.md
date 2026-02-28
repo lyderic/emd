@@ -5,7 +5,7 @@ This viewer is very basic and simple. It uses [Charm's _glamour_ library](https:
 
 ## Installation
 
-Download the binary corresponding to your platform. For the moment, I have only tested this on Linux (Arch). If you want paging, `less` needs to be installed.
+Download the binary corresponding to your platform. For the moment, I have only tested this on Linux (Arch, Debian, Ubuntu, Fedora). If you want paging, `less` needs to be installed.
 
 You can also build it with `go build`.
 
@@ -20,7 +20,7 @@ $ emd file.md
 ```text
 $ emd --help
 
-emd 0.1.6: markdown viewer for the command line
+emd 0.2.2: markdown viewer for the command line
 
 Available themes:
  • dark
@@ -39,6 +39,6 @@ Flags:
   -n, --no-pager      don't use pager
   -t, --theme name    name of the theme (default "dark")
   -v, --version       version for emd
-  -w, --width width   word wrap width
+  -w, --wrap width    word wrap width
 
 ```
