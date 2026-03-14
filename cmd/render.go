@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/charmbracelet/glamour"
+	//"github.com/charmbracelet/glamour"
+	"charm.land/glamour/v2"
 	"github.com/spf13/viper"
 )
 

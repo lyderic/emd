@@ -25,6 +25,12 @@ tag:
 	git tag "${tag}"
 	git push origin --tags
 
+clean:
+	rm -v emd-*
+
+version:
+	@grep VERSION cmd/globals.go
+
 [private]
 v:
 	just --evaluate
