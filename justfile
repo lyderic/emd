@@ -7,7 +7,12 @@ _help:
 
 CGO_ENABLED := '0' # otherwise binaries produced are dynamically linked and don't work on musl distros like alpine0
 
+# simple build
 build:
+	go build -v -o emd
+
+# build for amd64, arm64 and arm
+build-all:
 	#!/bin/bash
 	version=$(grep VERSION cmd/globals.go | awk -F= '{ print $2 }' | tr -d '"' | sed -e 's/ //')
 	echo $version
@@ -16,6 +21,7 @@ build:
 	GOARCH=arm   go build -v -o emd-${version}-linux-arm
 	xz --compress --keep -9 --extreme --verbose emd-*-linux-*
 
+# tag for release
 tag:
 	#!/bin/bash
 	git tag 
@@ -25,11 +31,13 @@ tag:
 	git tag "${tag}"
 	git push origin --tags
 
+# clean built binaries
 clean:
-	rm -v emd-*
+	rm -v emd*
 
+# show version in the source tree
 version:
-	@grep VERSION cmd/globals.go
+	grep VERSION cmd/globals.go
 
 [private]
 v:

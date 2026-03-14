@@ -39,7 +39,7 @@ func init() {
 		"config `file` (default is $HOME/.emd.yaml)")
 	rootCmd.PersistentFlags().StringP("theme", "t", "dark",
 		"`name` of the theme")
-	rootCmd.PersistentFlags().IntP("wrap", "w", 0,
+	rootCmd.PersistentFlags().IntP("wrap", "w", 64,
 		"word wrap `width`")
 	rootCmd.PersistentFlags().BoolP("no-pager", "n", false,
 		"don't use pager")
