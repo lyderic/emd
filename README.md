@@ -20,7 +20,7 @@ $ emd file.md
 ```text
 $ emd --help
 
-emd 0.2.2: markdown viewer for the command line
+emd 0.3.1: markdown viewer for the command line
 
 Available themes:
  • dark
@@ -39,6 +39,6 @@ Flags:
   -n, --no-pager      don't use pager
   -t, --theme name    name of the theme (default "dark")
   -v, --version       version for emd
-  -w, --wrap width    word wrap width
+  -w, --wrap width    word wrap width (default 64)
 
 ```
